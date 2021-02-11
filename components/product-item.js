@@ -4,12 +4,14 @@ class ProductItem extends HTMLElement {
   constructor(id, image, title, price) {
     super();
 
-    let cart = JSON.parse(localStorage.getItem('Lab6Cart'));
     const count = document.querySelector("#cart-count");
+    let cart = JSON.parse(localStorage.getItem('Lab6Cart'));
 
     if (cart == null) {
       cart = {}
     }
+
+    localStorage.setItem('Lab6Cart', JSON.stringify(cart));
 
     count.replaceChild(document.createTextNode(Object.keys(cart).length), count.firstChild);
 
@@ -53,6 +55,7 @@ class ProductItem extends HTMLElement {
 
       button.replaceChild(document.createTextNode(this.buttonText(cart[id])), button.firstChild);
       count.replaceChild(document.createTextNode(Object.keys(cart).length), count.firstChild);
+      
       localStorage.setItem('Lab6Cart', JSON.stringify(cart));
     });
 
